@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform} from 'react-native';
 import Colors from '../constants/colors';
 
 //custom button component
@@ -7,14 +7,26 @@ import Colors from '../constants/colors';
 //TouchableOpacity is used to give feedback to the user that the button has been clicked or to register on press event.
 //Text component can accept icons as props children
 const MainButton = props => {
-    return <TouchableOpacity activityOpacity={0.6} onPress={props.onPress}>
-        <View style={styles.button}>
-            <Text style ={styles.buttonText}>{props.children}</Text>
+    let ButtonComponent = TouchableOpacity;
+    if(Platform.OS == 'android' && Platform.Version >=21) {
+        ButtonComponent = TouchableNativeFeedback;
+    }
+    return (
+        <View style={styles.buttonContainer}>
+            <ButtonComponent activityOpacity={0.6} onPress={props.onPress}>
+                <View style={styles.button}>
+                    <Text style={styles.buttonText}>{props.children}</Text>
+                </View>
+            </ButtonComponent>
         </View>
-    </TouchableOpacity>
+    );
 };
 
 const styles = StyleSheet.create({
+    buttonContainer: {
+        borderRadius: 25,
+        overflow: 'hidden' //any child component which goes beyond this will clip
+    },
     button: {
         backgroundColor: Colors.primary,
         paddingVertical: 12,
@@ -23,7 +35,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color:'white',
-        fontFamily: 'open-sans',
+       // fontFamily: 'open-sans',
         fontSize: 18
     }
 });

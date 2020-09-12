@@ -16,32 +16,33 @@ import MainButton from '../components/MainButton';
 const GameOverScreen = props => {
 
     return (
-    <ScrollView>
-    <View style = {styles.screen}>
-        <TitleText>Game is Over!</TitleText>
-        <View style={styles.imageContainer}>
-            <Image 
-                source={require('../assets/success.png')} // this is for local image
-                //source={{uri: 'https://pixabay.com/photos/matterhorn-alpine-zermatt-mountains-1516733/'}} //used for web image
-                style = {styles.image}
-                resizeMode="cover">
-            </Image> 
-        </View>
-        <View style={styles.resultContainer}>
-            <BodyText style={styles.resultText}>Your phone needed <Text style={styles.highlight}>{props.roundsNumber} </Text> 
+        <ScrollView>
+            <View style={styles.screen}>
+                <TitleText>Game is Over!</TitleText>
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={require('../assets/success.png')} // this is for local image
+                        //source={{uri: 'https://pixabay.com/photos/matterhorn-alpine-zermatt-mountains-1516733/'}} //used for web image
+                        style={styles.image}
+                        resizeMode="cover">
+                    </Image>
+                </View>
+                <View style={styles.resultContainer}>
+                    <BodyText style={styles.resultText}>Your phone needed <Text style={styles.highlight}>{props.roundsNumber} </Text>
             rounds to guess the number <Text style={styles.highlight} > {props.userNumber}</Text> </BodyText>
-        </View>
-        <MainButton onPress={props.onGameRestart}>NEW GAME</MainButton>
-    </View>
-    </ScrollView>
-  );
+                </View>
+                <MainButton onPress={props.onGameRestart}>NEW GAME</MainButton>
+            </View>
+        </ScrollView>
+    );
 };
 
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
         justifyContent: 'center',
-        alignItems : 'center'
+        alignItems : 'center',
+        paddingVertical: 10
     },
     image: {
         width: '100%',
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     },
     highlight: {
         color: Colors.primary,
-        fontFamily: 'open-sans-bold'
+        //fontFamily: 'open-sans-bold'
     },
     resultContainer : {
         marginHorizontal : 30,
